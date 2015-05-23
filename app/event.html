@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>MowingCalendar</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-calendar/css/calendar.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <link rel="stylesheet" href="styles/util.css"/>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/bootstrap-calendar/js/calendar.js"></script>
+  <script src="bower_components/firebase/firebase.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+  <script src="bower_components/angularfire/dist/angularfire.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({app,.tmp}) scripts/main.js -->
+  <script src="scripts/constants.js"></script>
+  <script src="scripts/event.js"></script>
+  <!-- endbuild -->
+</head>
+<body ng-app="eakjbMowingCalendarEvent">
+<div ng-controller="EakjbEventController">
+  <div ng-hide="loaded">
+    <span class="glyphicon glyphicon-refresh spin center"></span> Loading...
+  </div>
+  <div class="panel panel-default" ng-show="loaded">
+    <div class="panel-heading">
+      <h4 class="no-margin" ng-bind="event.title"></h4>
+    </div>
+    <table class="table">
+      <tr>
+        <td>Property</td>
+        <td>Owner</td>
+        <td>Bid</td>
+      </tr>
+      <tr ng-class="{success:isHighestBid(bid)}" ng-repeat="bid in bids | orderBy:'-price'">
+        <td ng-bind="bid.property"></td>
+        <td ng-bind="bid.owner"></td>
+        <td ng-bind="bid.price|currency"></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="input-group-sm">
+            <input ng-model="data.property" type="text" placeholder="123 Street St." class="form-control"/>
+          </div>
+        </td>
+        <td>
+          <div class="input-group-sm">
+            <input ng-model="data.owner" type="text" placeholder="John Smith" class="form-control"/>
+          </div>
+        </td>
+        <td>
+            <div class="input-group-sm">
+              <input ng-model="data.price" type="number" class="form-control"/>
+            </div>
+        </td>
+      </tr>
+    </table>
+    <div class="panel-body">
+      <button ng-click="submit()" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

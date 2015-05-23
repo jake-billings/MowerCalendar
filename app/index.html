@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <title>MowingCalendar</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-calendar/css/calendar.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+  <link rel="stylesheet" href="styles/util.css"/>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/bootstrap-calendar/js/calendar.js"></script>
+  <script src="bower_components/firebase/firebase.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="bower_components/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+  <script src="bower_components/angularfire/dist/angularfire.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <script src="http://maps.googleapis.com/maps/api/js"></script>
+
+  <!-- build:js({app,.tmp}) scripts/main.js -->
+  <script src="scripts/constants.js"></script>
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+</head>
+<body ng-app="eakjbMowingCalendar">
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<div class="container">
+  <div ng-controller="EakjbNavController" class="header">
+    <ul class="nav nav-pills pull-right">
+      <li ng-class="{active:isActive('/calendar')}"><a href ng-click="$location.path('/')">Home</a></li>
+      <li ng-class="{active:isActive('/about')}"><a href ng-click="$location.path('/about')">About</a></li>
+      <li ng-class="{active:isActive('/contact')}"><a href ng-click="$location.path('/contact')">Contact</a></li>
+    </ul>
+    <h3 class="text-muted">Lawn Mowing</h3>
+  </div>
+
+  <div class="modal fade" id="events-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="no-margin">Details</h3>
+        </div>
+        <div class="modal-body" style="height: 400px">
+        </div>
+        <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-view></div>
+
+  <div class="footer">
+    <p><span class="glyphicon glyphicon-heart"></span> Your Lawn.</p>
+  </div>
+</div>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+  (function (b, o, i, l, e, r) {
+    b.GoogleAnalyticsObject = l;
+    b[l] || (b[l] =
+      function () {
+        (b[l].q = b[l].q || []).push(arguments)
+      });
+    b[l].l = +new Date;
+    e = o.createElement(i);
+    r = o.getElementsByTagName(i)[0];
+    e.src = '//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e, r)
+  }(window, document, 'script', 'ga'));
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

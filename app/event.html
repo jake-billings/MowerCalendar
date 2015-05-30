@@ -9,9 +9,9 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(.) styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="bower_components/bootstrap-calendar/css/calendar.css" />
-  <link rel="stylesheet" href="bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="bower_components/bootstrap-calendar/css/calendar.css"/>
+  <link rel="stylesheet" href="bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
   <!-- endbower -->
   <!-- endbuild -->
   <link rel="stylesheet" href="styles/util.css"/>
@@ -46,7 +46,35 @@
     <div class="panel-heading">
       <h4 class="no-margin" ng-bind="event.title"></h4>
     </div>
-    <table class="table">
+
+    <div ng-show="event.fixedPrice" class="panel-body">
+      <div ng-show="bids.length>1">
+        <p>There is a conflict in reservations for this event.  Please contact us.</p>
+      </div>
+      <div ng-show="bids.length==1">
+        <p>Reserved by <span ng-bind="bids[0].owner"></span> for <span ng-bind="bids[0].property"></span>.</p>
+      </div>
+      <div ng-show="bids.length<1">
+        <div class="input-group">
+          <span class="input-group-addon">Property</span>
+          <input type="text" ng-model="data.property" placeholder="123 Street St." class="form-control"/>
+        </div>
+        <br/>
+
+        <div class="input-group">
+          <span class="input-group-addon">Owner</span>
+          <input type="text" ng-model="data.owner" class="form-control" placeholder="John Smith"/>
+        </div>
+        <br/>
+
+        <div class="input-group">
+          <span class="input-group-addon">Price</span>
+          <span class="input-group-addon">$<span ng-bind="data.price"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <table ng-hide="event.fixedPrice" class="table">
       <tr>
         <td>Property</td>
         <td>Owner</td>
@@ -69,14 +97,15 @@
           </div>
         </td>
         <td>
-            <div class="input-group-sm">
-              <input ng-model="data.price" type="number" class="form-control"/>
-            </div>
+          <div class="input-group-sm">
+            <input ng-model="data.price" type="number" class="form-control"/>
+          </div>
         </td>
       </tr>
     </table>
+
     <div class="panel-body">
-      <button ng-click="submit()" class="btn btn-primary">Submit</button>
+      <button ng-click="submit()" ng-disabled="!isValid()" class="btn btn-primary">Submit</button>
     </div>
   </div>
 </div>

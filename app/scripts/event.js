@@ -15,12 +15,16 @@
         return other==$scope.highestBid;
       };
 
-      $scope.submit = function() {
-        if (!isNaN($scope.data.price)&&
+      $scope.isValid = function() {
+        return !isNaN($scope.data.price)&&
           $scope.data.owner&&$scope.data.owner!==""&&
-          $scope.data.property&&$scope.data.property!=="")
-          $scope.bids.$add($scope.data);
+          $scope.data.property&&$scope.data.property!=="";
       };
+
+      $scope.submit = function() {
+        if ($scope.isValid()) $scope.bids.$add($scope.data);
+      };
+
       $scope.bids.$loaded(function() {
         $scope.loaded=true;
       });

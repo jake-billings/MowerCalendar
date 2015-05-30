@@ -1,6 +1,13 @@
 <div class="media">
   <div class="media-body">
-    <h4 class="media-heading">Why Choose Local?</h4>
-    Local mowing offers
+    <h4 class="media-heading">Contact Us</h4>
+    <br />
+    <p ng-repeat="contact in contacts">
+      <span ng-bind="contact.name"></span>: <a ng-show="contact.link" ng-href="{{contact.link}}" ng-bind="contact.value"></a>
+      <span ng-hide="contact.link" ng-bind="contact.value"></span>
+    </p>
+  </div>
+  <div class="media-right">
+    <div id="googleMap" style="width:500px;height:380px;"></div>
   </div>
 </div>
